@@ -56,6 +56,8 @@
 
 - (void)addObserver:(id)observer selector:(SEL)selector hotKey:(LLHotKey *)hotKey
 {
+	NSParameterAssert(hotKey != nil);
+	
 	NSMutableSet *observers = [NSMutableSet setWithSet:[[self cocoaHotKeyToObserversMap] objectForKey:hotKey]];
 	
 	if ([observers count] == 0) {
@@ -68,6 +70,8 @@
 
 - (void)removeObserver:(id)observer hotKey:(LLHotKey *)hotKey
 {
+	NSParameterAssert(hotKey != nil);
+	
 	NSMutableSet *observers = [NSMutableSet setWithSet:[[self cocoaHotKeyToObserversMap] objectForKey:hotKey]];
 	[observers removeObject:[_LLHotKeyObserver observerWithObject:observer selector:NULL]];
 	
