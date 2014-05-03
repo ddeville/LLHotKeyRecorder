@@ -117,34 +117,32 @@ NSString *LLHotKeyStringForHotKey(LLHotKey *hotKey)
 	return [NSString stringWithFormat:@"%@%@", LLHotKeyStringForModifiers([hotKey modifierFlags]), LLHotKeyStringForKeyCode([hotKey keyCode])];
 }
 
-static BOOL _LLHotKeyIsHotKeyAvailableInMenu(LLHotKey *hotKey, NSMenu *menu)
+static BOOL _LLHotKeyCanUseKeyEquivalent(NSEvent *event, NSMenu *menu)
 {
-	for (NSMenuItem *item in [menu itemArray]) {
-		if ([item hasSubmenu]) {
-			BOOL subItemAvailable = _LLHotKeyIsHotKeyAvailableInMenu(hotKey, [item submenu]);
-			if (!subItemAvailable) {
+	static NSButton *button = nil;
+	static dispatch_once_t onceToken = 0;
+	dispatch_once(&onceToken, ^ {
+		button = [[NSButton alloc] initWithFrame:CGRectZero];
+	});
+	
+	for (NSMenuItem *currentMenuItem in [menu itemArray]) {
+		if ([currentMenuItem hasSubmenu]) {
+			if (!_LLHotKeyCanUseKeyEquivalent(event, [currentMenuItem submenu])) {
 				return NO;
 			}
 		}
 		
-		NSString *keyEquivalent = LLHotKeyStringForKeyCode([hotKey keyCode]);
+		[button setKeyEquivalent:[currentMenuItem keyEquivalent]];
+		[button setKeyEquivalentModifierMask:[currentMenuItem keyEquivalentModifierMask]];
 		
-		BOOL equalFlags = (([item keyEquivalentModifierMask] & (NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask)) == [hotKey modifierFlags]);
-		BOOL equalHotkeyLowercase = [[[item keyEquivalent] lowercaseString] isEqualToString:keyEquivalent];
-		
-		if (equalHotkeyLowercase && ![[item keyEquivalent] isEqualToString:keyEquivalent]) {
-			equalFlags = ((([item keyEquivalentModifierMask] | NSShiftKeyMask) & (NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask)) == [hotKey modifierFlags]);
-		}
-		
-		if (equalFlags && equalHotkeyLowercase) {
+		if ([button performKeyEquivalent:event]) {
 			return NO;
 		}
 	}
-	
 	return YES;
 }
 
-BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey)
+BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey, NSEvent *event)
 {
 	CFArrayRef hotKeys = NULL;
 	OSStatus copied = CopySymbolicHotKeys(&hotKeys);
@@ -166,14 +164,14 @@ BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey)
 	
 	CFRelease(hotKeys);
 	
-	if (!_LLHotKeyIsHotKeyAvailableInMenu(hotKey, [[NSApplication sharedApplication] mainMenu])) {
+	if (!_LLHotKeyCanUseKeyEquivalent(event, [[NSApplication sharedApplication] mainMenu])) {
 		return NO;
 	}
 	
 	return YES;
 }
 
-extern BOOL LLHotKeyIsHotKeyValid(LLHotKey *hotKey)
+BOOL LLHotKeyIsHotKeyValid(LLHotKey *hotKey, NSEvent *event)
 {
 	unsigned short keyCode = [hotKey keyCode];
 	NSUInteger modifierFlags = [hotKey modifierFlags];

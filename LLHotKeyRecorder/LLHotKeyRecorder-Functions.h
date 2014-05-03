@@ -14,5 +14,5 @@ extern NSString *LLHotKeyStringForModifiers(NSUInteger modifiers);
 extern NSString *LLHotKeyStringForKeyCode(unsigned short keyCode);
 extern NSString *LLHotKeyStringForHotKey(LLHotKey *hotKey);
 
-extern BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey);
-extern BOOL LLHotKeyIsHotKeyValid(LLHotKey *hotKey);
+extern BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey, NSEvent *event);
+extern BOOL LLHotKeyIsHotKeyValid(LLHotKey *hotKey, NSEvent *event);

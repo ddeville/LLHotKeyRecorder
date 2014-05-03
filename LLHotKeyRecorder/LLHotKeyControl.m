@@ -293,11 +293,11 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 			return nil;
 		}
 		
-		if (!LLHotKeyIsHotKeyValid(hotKey)) {
+		if (!LLHotKeyIsHotKeyValid(hotKey, event)) {
 			return nil;
 		}
 		
-		if (!LLHotKeyIsHotKeyAvailable(hotKey)) {
+		if (!LLHotKeyIsHotKeyAvailable(hotKey, event)) {
 			NSBeep();
 			[welf setShortcutPlaceholder:nil];
 		}
