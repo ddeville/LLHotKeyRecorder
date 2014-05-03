@@ -9,3 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "LLHotKeyRecorder/LLHotKeyRecorder-Constants.h"
+
+#import "LLHotKeyRecorder/LLHotKey.h"
+#import "LLHotKeyRecorder/LLHotKeyCenter.h"

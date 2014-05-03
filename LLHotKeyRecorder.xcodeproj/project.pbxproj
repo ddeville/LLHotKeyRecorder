@@ -13,14 +13,14 @@
 		6D05D949191560F200CAF7AF /* LLHotKeyRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05D92C191560F200CAF7AF /* LLHotKeyRecorder.framework */; };
 		6D05D95B1915614E00CAF7AF /* LLHotKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D95A1915614E00CAF7AF /* LLHotKeyTests.m */; };
 		6D05D9611915616000CAF7AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D05D95F1915616000CAF7AF /* InfoPlist.strings */; };
-		6D05D96B1915625000CAF7AF /* LLHotKeyRecorder-Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9671915625000CAF7AF /* LLHotKeyRecorder-Constants.h */; };
+		6D05D96B1915625000CAF7AF /* LLHotKeyRecorder-Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9671915625000CAF7AF /* LLHotKeyRecorder-Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D96C1915625000CAF7AF /* LLHotKeyRecorder-Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9681915625000CAF7AF /* LLHotKeyRecorder-Constants.m */; };
-		6D05D96D1915625000CAF7AF /* LLHotKeyRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9691915625000CAF7AF /* LLHotKeyRecorder.h */; };
+		6D05D96D1915625000CAF7AF /* LLHotKeyRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9691915625000CAF7AF /* LLHotKeyRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D96E1915625000CAF7AF /* LLHotKeyRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D96A1915625000CAF7AF /* LLHotKeyRecorder.m */; };
 		6D05D9721915626000CAF7AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D05D96F1915626000CAF7AF /* InfoPlist.strings */; };
-		6D05D9761915628500CAF7AF /* LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9741915628500CAF7AF /* LLHotKey.h */; };
+		6D05D9761915628500CAF7AF /* LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9741915628500CAF7AF /* LLHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D9771915628500CAF7AF /* LLHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9751915628500CAF7AF /* LLHotKey.m */; };
-		6D05D97A1915628E00CAF7AF /* LLHotKeyCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9781915628E00CAF7AF /* LLHotKeyCenter.h */; };
+		6D05D97A1915628E00CAF7AF /* LLHotKeyCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9781915628E00CAF7AF /* LLHotKeyCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D97B1915628E00CAF7AF /* LLHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9791915628E00CAF7AF /* LLHotKeyCenter.m */; };
 		6D05D97F191562A500CAF7AF /* _LLHotKeyObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D97D191562A500CAF7AF /* _LLHotKeyObserver.h */; };
 		6D05D980191562A500CAF7AF /* _LLHotKeyObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D97E191562A500CAF7AF /* _LLHotKeyObserver.m */; };
