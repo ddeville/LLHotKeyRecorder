@@ -27,6 +27,11 @@
 	return hotKey;
 }
 
++ (instancetype)hotKeyWithEvent:(NSEvent *)event
+{
+	return [self hotKeyWithKeyCode:[event keyCode] modifierFlags:[event modifierFlags]];
+}
+
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(LLHotKey *)object

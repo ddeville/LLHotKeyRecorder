@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Damien DeVille. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @interface LLHotKey : NSObject <NSCopying, NSCoding, NSSecureCoding>
 
 + (instancetype)hotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)modifierFlags;
++ (instancetype)hotKeyWithEvent:(NSEvent *)event;
 
 @property (readonly, assign, nonatomic) unsigned short keyCode;
 @property (readonly, assign, nonatomic) NSUInteger modifierFlags;
