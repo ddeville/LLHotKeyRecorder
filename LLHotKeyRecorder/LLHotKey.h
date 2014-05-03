@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LLHotKey : NSObject <NSCopying>
+@interface LLHotKey : NSObject <NSCopying, NSCoding, NSSecureCoding>
 
 + (instancetype)hotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)modifierFlags;
 

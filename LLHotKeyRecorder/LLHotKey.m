@@ -61,5 +61,34 @@
 	return hotKey;
 }
 
+#pragma mark - NSCoding
+
+static NSString * const LLHotKeyKeyCode = @"keyCode";
+static NSString * const LLHotKeyModifierFlags = @"modifierFlags";
+
++ (BOOL)supportsSecureCoding
+{
+	return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+	[coder encodeObject:@([self keyCode]) forKey:LLHotKeyKeyCode];
+	[coder encodeObject:@([self modifierFlags]) forKey:LLHotKeyModifierFlags];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [self init];
+	if (self == nil) {
+		return nil;
+	}
+	
+	_keyCode = (unsigned short)[[decoder decodeObjectOfClass:[NSNumber class] forKey:LLHotKeyKeyCode] unsignedIntegerValue];
+	_modifierFlags = [[decoder decodeObjectOfClass:[NSNumber class] forKey:LLHotKeyModifierFlags] unsignedIntegerValue];
+	
+	return self;
+}
+
 @end
 
