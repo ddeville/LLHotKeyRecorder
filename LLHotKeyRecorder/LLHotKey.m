@@ -107,3 +107,11 @@ static NSString * const LLHotKeyModifierFlags = @"modifierFlags";
 
 @end
 
+@implementation LLHotKey (NullHotKey)
+
++ (instancetype)nullKey
+{
+	return [LLHotKey hotKeyWithKeyCode:0 modifierFlags:0];
+}
+
+@end

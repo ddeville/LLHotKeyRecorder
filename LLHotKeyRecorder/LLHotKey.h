@@ -17,3 +17,9 @@
 @property (readonly, assign, nonatomic) NSUInteger modifierFlags;
 
 @end
+
+@interface LLHotKey (NullHotKey)
+
++ (instancetype)nullKey;
+
+@end
