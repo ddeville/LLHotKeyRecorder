@@ -8,6 +8,8 @@
 
 #import "LLHotKey.h"
 
+#import "LLHotKeyRecorder-Functions.h"
+
 @interface LLHotKey ()
 
 @property (readwrite, assign, nonatomic) unsigned short keyCode;
@@ -33,6 +35,14 @@
 }
 
 #pragma mark - NSObject
+
+- (NSString *)description
+{
+	NSMutableString *description = [NSMutableString stringWithString:[super description]];
+	[description appendString:@" – "];
+	[description appendFormat:@"%@", LLHotKeyStringForHotKey(self)];
+	return description;
+}
 
 - (BOOL)isEqual:(LLHotKey *)object
 {
