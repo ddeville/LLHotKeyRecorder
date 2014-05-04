@@ -213,7 +213,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 		return;
 	}
 	
-	if (![self isRecording] && mousedAccessory) {
+	if (![self isRecording] && [self hotKeyValue] != nil && mousedAccessory) {
 		[self setHotKeyValue:nil];
 		return;
 	}
