@@ -271,42 +271,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	
 	__weak typeof(self) welf = self;
 	id eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyDownMask | NSFlagsChangedMask) handler:^ NSEvent * (NSEvent *event) {
-		LLHotKey *hotKey = [LLHotKey hotKeyWithEvent:event];
-		
-		unsigned short keyCode = [hotKey keyCode];
-		NSUInteger modifierFlags = [hotKey modifierFlags];
-		
-		if (keyCode == kVK_Delete || keyCode == kVK_ForwardDelete) {
-			[welf setHotKeyValue:nil];
-			[welf setRecording:NO];
-			return nil;
-		}
-		
-		if (keyCode == kVK_Escape) {
-			[welf setRecording:NO];
-			return nil;
-		}
-		
-		NSString *keyCodeString = LLHotKeyStringForKeyCode(keyCode);
-		if ([keyCodeString length] == 0) {
-			[welf setShortcutPlaceholder:LLHotKeyStringForModifiers(modifierFlags)];
-			return nil;
-		}
-		
-		if (!LLHotKeyIsHotKeyValid(hotKey, event)) {
-			return nil;
-		}
-		
-		if (!LLHotKeyIsHotKeyAvailable(hotKey, event)) {
-			NSBeep();
-			[welf setShortcutPlaceholder:nil];
-		}
-		else {
-			[welf setHotKeyValue:hotKey];
-			[welf setRecording:NO];
-		}
-		
-		return nil;
+		return [welf _handleLocalEvent:event];
 	}];
 	[self setEventMonitor:eventMonitor];
 }
@@ -342,6 +307,48 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:[self resignObserver]];
 	[self setResignObserver:nil];
+}
+
+#pragma mark - Private
+
+- (NSEvent *)_handleLocalEvent:(NSEvent *)event
+{
+	LLHotKey *hotKey = [LLHotKey hotKeyWithEvent:event];
+	
+	unsigned short keyCode = [hotKey keyCode];
+	NSUInteger modifierFlags = [hotKey modifierFlags];
+	
+	if (keyCode == kVK_Delete || keyCode == kVK_ForwardDelete) {
+		[self setHotKeyValue:nil];
+		[self setRecording:NO];
+		return nil;
+	}
+	
+	if (keyCode == kVK_Escape) {
+		[self setRecording:NO];
+		return nil;
+	}
+	
+	NSString *keyCodeString = LLHotKeyStringForKeyCode(keyCode);
+	if ([keyCodeString length] == 0) {
+		[self setShortcutPlaceholder:LLHotKeyStringForModifiers(modifierFlags)];
+		return nil;
+	}
+	
+	if (!LLHotKeyIsHotKeyValid(hotKey, event)) {
+		return nil;
+	}
+	
+	if (!LLHotKeyIsHotKeyAvailable(hotKey, event)) {
+		NSBeep();
+		[self setShortcutPlaceholder:nil];
+	}
+	else {
+		[self setHotKeyValue:hotKey];
+		[self setRecording:NO];
+	}
+	
+	return nil;
 }
 
 @end
