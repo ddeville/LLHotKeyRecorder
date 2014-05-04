@@ -20,6 +20,6 @@
 
 @interface LLHotKey (NullHotKey)
 
-+ (instancetype)nullKey;
++ (instancetype)nullHotKey;
 
 @end
