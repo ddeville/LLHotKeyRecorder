@@ -28,6 +28,8 @@
 		6D05D9CF1915745A00CAF7AF /* LLHotKeyRecorder-Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9CD1915745A00CAF7AF /* LLHotKeyRecorder-Functions.m */; };
 		6D05D9D21915839800CAF7AF /* LLHotKeyControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9D01915839800CAF7AF /* LLHotKeyControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D9D31915839800CAF7AF /* LLHotKeyControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */; };
+		6D05DA1819162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D05DA1919162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		6D05D9CD1915745A00CAF7AF /* LLHotKeyRecorder-Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LLHotKeyRecorder-Functions.m"; path = "LLHotKeyRecorder/LLHotKeyRecorder-Functions.m"; sourceTree = SOURCE_ROOT; };
 		6D05D9D01915839800CAF7AF /* LLHotKeyControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLHotKeyControl.h; path = LLHotKeyRecorder/LLHotKeyControl.h; sourceTree = SOURCE_ROOT; };
 		6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHotKeyControl.m; path = LLHotKeyRecorder/LLHotKeyControl.m; sourceTree = SOURCE_ROOT; };
+		6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+LLHotKey.h"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.h"; sourceTree = SOURCE_ROOT; };
+		6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+LLHotKey.m"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 				6D05D9781915628E00CAF7AF /* LLHotKeyCenter.h */,
 				6D05D9791915628E00CAF7AF /* LLHotKeyCenter.m */,
 				6D05D9C719156ED700CAF7AF /* Controls */,
+				6D05DA1519162FAA00CAF7AF /* User Defaults */,
 				6D05D97C1915629500CAF7AF /* Private */,
 				6D05D9621915617500CAF7AF /* Other Sources */,
 				6D05D936191560F200CAF7AF /* Supporting Files */,
@@ -205,6 +210,15 @@
 			name = Controls;
 			sourceTree = "<group>";
 		};
+		6D05DA1519162FAA00CAF7AF /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */,
+				6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */,
+			);
+			name = "User Defaults";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -218,6 +232,7 @@
 				6D05D9761915628500CAF7AF /* LLHotKey.h in Headers */,
 				6D05D97A1915628E00CAF7AF /* LLHotKeyCenter.h in Headers */,
 				6D05D9CE1915745A00CAF7AF /* LLHotKeyRecorder-Functions.h in Headers */,
+				6D05DA1819162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h in Headers */,
 				6D05D97F191562A500CAF7AF /* _LLHotKeyObserver.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +335,7 @@
 				6D05D9D31915839800CAF7AF /* LLHotKeyControl.m in Sources */,
 				6D05D97B1915628E00CAF7AF /* LLHotKeyCenter.m in Sources */,
 				6D05D9771915628500CAF7AF /* LLHotKey.m in Sources */,
+				6D05DA1919162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m in Sources */,
 				6D05D96C1915625000CAF7AF /* LLHotKeyRecorder-Constants.m in Sources */,
 				6D05D96E1915625000CAF7AF /* LLHotKeyRecorder.m in Sources */,
 				6D05D980191562A500CAF7AF /* _LLHotKeyObserver.m in Sources */,
