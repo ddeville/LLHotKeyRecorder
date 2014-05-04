@@ -15,3 +15,5 @@
 #import "LLHotKeyRecorder/LLHotKeyCenter.h"
 
 #import "LLHotKeyRecorder/LLHotKeyControl.h"
+
+#import "LLHotKeyRecorder/NSUserDefaults+LLHotKey.h"
