@@ -316,7 +316,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	LLHotKey *hotKey = [LLHotKey hotKeyWithEvent:event];
 	
 	unsigned short keyCode = [hotKey keyCode];
-	NSUInteger modifierFlags = [hotKey modifierFlags];
+	NSUInteger modifierFlags = ([hotKey modifierFlags] & (NSControlKeyMask | NSAlternateKeyMask | NSShiftKeyMask | NSCommandKeyMask));
 	
 	if (keyCode == kVK_Delete || keyCode == kVK_ForwardDelete) {
 		[self setHotKeyValue:nil];
@@ -329,8 +329,12 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 		return nil;
 	}
 	
-	NSString *keyCodeString = LLHotKeyStringForKeyCode(keyCode);
-	if ([keyCodeString length] == 0) {
+	if (modifierFlags == NSCommandKeyMask && (keyCode == kVK_ANSI_W || keyCode == kVK_ANSI_Q)) {
+		[self setRecording:NO];
+		return event;
+	}
+	
+	if ([LLHotKeyStringForKeyCode(keyCode) length] == 0) {
 		[self setShortcutPlaceholder:LLHotKeyStringForModifiers(modifierFlags)];
 		return nil;
 	}
@@ -342,11 +346,11 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	if (!LLHotKeyIsHotKeyAvailable(hotKey, event)) {
 		NSBeep();
 		[self setShortcutPlaceholder:nil];
+		return nil;
 	}
-	else {
-		[self setHotKeyValue:hotKey];
-		[self setRecording:NO];
-	}
+	
+	[self setHotKeyValue:hotKey];
+	[self setRecording:NO];
 	
 	return nil;
 }
