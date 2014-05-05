@@ -36,10 +36,13 @@
 
 static void _CommonInit(LLHotKeyControl *self)
 {
+	[self setFocusRingType:NSFocusRingTypeNone];
+	
 	NSButtonCell *cell = [[NSButtonCell alloc] init];
 	[cell setButtonType:NSPushOnPushOffButton];
 	[cell setFont:[[NSFontManager sharedFontManager] convertFont:[cell font] toSize:11.0]];
 	[cell setBezelStyle:NSRoundRectBezelStyle];
+	[cell setFocusRingType:NSFocusRingTypeNone];
 	[self setCell:cell];
 }
 
@@ -67,6 +70,37 @@ static void _CommonInit(LLHotKeyControl *self)
 {
 	[self teardownEventMonitoring];
 	[self teardownResignObserver];
+}
+
+#pragma mark - View
+
+- (void)viewWillMoveToWindow:(NSWindow *)window
+{
+	[super viewWillMoveToWindow:window];
+	
+	[self setRecording:NO];
+}
+
+- (BOOL)acceptsFirstMouse:(NSEvent *)event
+{
+	return YES;
+}
+
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+}
+
+- (BOOL)needsPanelToBecomeKey
+{
+	return YES;
+}
+
+- (BOOL)resignFirstResponder
+{
+	[self setRecording:NO];
+	
+	return YES;
 }
 
 #pragma mark - Public accessors
@@ -255,13 +289,6 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 }
 
 #pragma mark - Monitoring
-
-- (void)viewWillMoveToWindow:(NSWindow *)window
-{
-	[super viewWillMoveToWindow:window];
-	
-	[self setRecording:NO];
-}
 
 - (void)setupEventMonitoring
 {
