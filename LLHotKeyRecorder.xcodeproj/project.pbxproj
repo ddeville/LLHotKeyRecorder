@@ -16,7 +16,6 @@
 		6D05D96C1915625000CAF7AF /* LLHotKeyRecorder-Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9681915625000CAF7AF /* LLHotKeyRecorder-Constants.m */; };
 		6D05D96D1915625000CAF7AF /* LLHotKeyRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9691915625000CAF7AF /* LLHotKeyRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D96E1915625000CAF7AF /* LLHotKeyRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D96A1915625000CAF7AF /* LLHotKeyRecorder.m */; };
-		6D05D9721915626000CAF7AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D05D96F1915626000CAF7AF /* InfoPlist.strings */; };
 		6D05D9761915628500CAF7AF /* LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9741915628500CAF7AF /* LLHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05D9771915628500CAF7AF /* LLHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9751915628500CAF7AF /* LLHotKey.m */; };
 		6D05D97A1915628E00CAF7AF /* LLHotKeyCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05D9781915628E00CAF7AF /* LLHotKeyCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +28,7 @@
 		6D05D9D31915839800CAF7AF /* LLHotKeyControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */; };
 		6D05DA1819162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05DA1919162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */; };
+		6D6B3DD6197C0E1800EE9136 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D6B3DD8197C0E1800EE9136 /* InfoPlist.strings */; };
 		6D92E7C5197C0CA900A5C5BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D92E7C7197C0CA900A5C5BF /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,6 @@
 		6D05D9681915625000CAF7AF /* LLHotKeyRecorder-Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LLHotKeyRecorder-Constants.m"; path = "LLHotKeyRecorder/LLHotKeyRecorder-Constants.m"; sourceTree = SOURCE_ROOT; };
 		6D05D9691915625000CAF7AF /* LLHotKeyRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLHotKeyRecorder.h; path = LLHotKeyRecorder/LLHotKeyRecorder.h; sourceTree = SOURCE_ROOT; };
 		6D05D96A1915625000CAF7AF /* LLHotKeyRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHotKeyRecorder.m; path = LLHotKeyRecorder/LLHotKeyRecorder.m; sourceTree = SOURCE_ROOT; };
-		6D05D9701915626000CAF7AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = LLHotKeyRecorder/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		6D05D9711915626000CAF7AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LLHotKeyRecorder/Info.plist; sourceTree = SOURCE_ROOT; };
 		6D05D9741915628500CAF7AF /* LLHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLHotKey.h; path = LLHotKeyRecorder/LLHotKey.h; sourceTree = SOURCE_ROOT; };
 		6D05D9751915628500CAF7AF /* LLHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHotKey.m; path = LLHotKeyRecorder/LLHotKey.m; sourceTree = SOURCE_ROOT; };
@@ -70,17 +69,18 @@
 		6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHotKeyControl.m; path = LLHotKeyRecorder/LLHotKeyControl.m; sourceTree = SOURCE_ROOT; };
 		6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+LLHotKey.h"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.h"; sourceTree = SOURCE_ROOT; };
 		6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+LLHotKey.m"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.m"; sourceTree = SOURCE_ROOT; };
+		6D6B3DD7197C0E1800EE9136 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D6B3DD9197C0E1B00EE9136 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D6B3DDA197C0E1F00EE9136 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D6B3DDB197C0E1F00EE9136 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D6B3DDC197C0E2000EE9136 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D6B3DDD197C0E2100EE9136 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D92E7C6197C0CA900A5C5BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D92E7C9197C0CB000A5C5BF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D92E7CB197C0CB300A5C5BF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D92E7CD197C0CB700A5C5BF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D92E7CF197C0CBC00A5C5BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D92E7D1197C0CC000A5C5BF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6D92E7D2197C0D0700A5C5BF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = LLHotKeyRecorder/fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D92E7D3197C0D0D00A5C5BF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = LLHotKeyRecorder/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D92E7D4197C0D0F00A5C5BF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = LLHotKeyRecorder/es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D92E7D5197C0D1100A5C5BF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = LLHotKeyRecorder/it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D92E7D6197C0D1400A5C5BF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = LLHotKeyRecorder/pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				6D05D9711915626000CAF7AF /* Info.plist */,
-				6D05D96F1915626000CAF7AF /* InfoPlist.strings */,
+				6D6B3DD8197C0E1800EE9136 /* InfoPlist.strings */,
 				6D92E7C7197C0CA900A5C5BF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
@@ -328,8 +328,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D05D9721915626000CAF7AF /* InfoPlist.strings in Resources */,
 				6D92E7C5197C0CA900A5C5BF /* Localizable.strings in Resources */,
+				6D6B3DD6197C0E1800EE9136 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,18 +377,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6D05D96F1915626000CAF7AF /* InfoPlist.strings */ = {
+		6D6B3DD8197C0E1800EE9136 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6D05D9701915626000CAF7AF /* en */,
-				6D92E7D2197C0D0700A5C5BF /* fr */,
-				6D92E7D3197C0D0D00A5C5BF /* de */,
-				6D92E7D4197C0D0F00A5C5BF /* es */,
-				6D92E7D5197C0D1100A5C5BF /* it */,
-				6D92E7D6197C0D1400A5C5BF /* pt */,
+				6D6B3DD7197C0E1800EE9136 /* en */,
+				6D6B3DD9197C0E1B00EE9136 /* fr */,
+				6D6B3DDA197C0E1F00EE9136 /* de */,
+				6D6B3DDB197C0E1F00EE9136 /* es */,
+				6D6B3DDC197C0E2000EE9136 /* it */,
+				6D6B3DDD197C0E2100EE9136 /* pt */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
+			path = LLHotKeyRecorder;
+			sourceTree = SOURCE_ROOT;
 		};
 		6D92E7C7197C0CA900A5C5BF /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
