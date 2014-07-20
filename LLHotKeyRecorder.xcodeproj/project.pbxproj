@@ -30,6 +30,7 @@
 		6D05D9D31915839800CAF7AF /* LLHotKeyControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */; };
 		6D05DA1819162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D05DA1919162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */; };
+		6D92E77B197C090700A5C5BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D92E77A197C090700A5C5BF /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		6D05D9D11915839800CAF7AF /* LLHotKeyControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHotKeyControl.m; path = LLHotKeyRecorder/LLHotKeyControl.m; sourceTree = SOURCE_ROOT; };
 		6D05DA1619162FCB00CAF7AF /* NSUserDefaults+LLHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+LLHotKey.h"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.h"; sourceTree = SOURCE_ROOT; };
 		6D05DA1719162FCB00CAF7AF /* NSUserDefaults+LLHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+LLHotKey.m"; path = "LLHotKeyRecorder/NSUserDefaults+LLHotKey.m"; sourceTree = SOURCE_ROOT; };
+		6D92E77A197C090700A5C5BF /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = LLHotKeyRecorder/Localizable.strings; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				6D05D9711915626000CAF7AF /* Info.plist */,
 				6D05D96F1915626000CAF7AF /* InfoPlist.strings */,
+				6D92E77A197C090700A5C5BF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D05D9721915626000CAF7AF /* InfoPlist.strings in Resources */,
+				6D92E77B197C090700A5C5BF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
