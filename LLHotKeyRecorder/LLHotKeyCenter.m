@@ -46,7 +46,7 @@
 	_carbonHotKeyIDToCocoaHotKeyMap = [NSMutableDictionary dictionary];
 	_cocoaHotKeyToObserversMap = [NSMutableDictionary dictionary];
 	
-	EventTypeSpec eventTypeSpec = {.eventClass = kEventClassKeyboard, .eventKind = kEventHotKeyReleased};
+	EventTypeSpec eventTypeSpec = {.eventClass = kEventClassKeyboard, .eventKind = kEventHotKeyPressed};
 	InstallApplicationEventHandler(&_LLHotKeyCenterHotKeyEventHandler, 1, &eventTypeSpec, (__bridge void *)self, NULL);
 	
 	return self;
