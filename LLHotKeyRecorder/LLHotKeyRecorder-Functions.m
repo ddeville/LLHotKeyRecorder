@@ -8,7 +8,7 @@
 
 #import "LLHotKeyRecorder-Functions.h"
 
-#import <Carbon/Carbon.h>
+@import Carbon;
 
 #import "LLHotKey.h"
 

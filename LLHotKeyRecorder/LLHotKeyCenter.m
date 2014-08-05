@@ -8,8 +8,8 @@
 
 #import "LLHotKeyCenter.h"
 
-#import <objc/message.h>
-#import <Carbon/Carbon.h>
+@import ObjectiveC;
+@import Carbon;
 
 #import "LLHotKey.h"
 #import "_LLHotKeyObserver.h"

@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Damien DeVille. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 extern NSString * const LLHotKeyRecorderBundleIdentifier;
