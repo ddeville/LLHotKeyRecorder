@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Damien DeVille. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @interface _LLHotKeyObserver : NSObject
 

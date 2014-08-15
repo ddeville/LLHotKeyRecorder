@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Damien DeVille. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "LLHotKeyRecorder/LLHotKeyRecorder-Constants.h"
 #import "LLHotKeyRecorder/LLHotKeyRecorder-Functions.h"
