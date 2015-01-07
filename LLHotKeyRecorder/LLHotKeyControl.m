@@ -296,7 +296,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 		return;
 	}
 	
-	__weak typeof(self) welf = self;
+	__weak typeof (self) welf = self;
 	id eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyDownMask | NSFlagsChangedMask) handler:^ NSEvent * (NSEvent *event) {
 		__strong typeof (welf) strelf = welf;
 		return [strelf _handleLocalEvent:event];
