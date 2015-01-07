@@ -8,7 +8,7 @@
 
 #import "LLHotKeyControl.h"
 
-@import Carbon;
+#import <Carbon/Carbon.h>
 
 #import "LLHotKey.h"
 

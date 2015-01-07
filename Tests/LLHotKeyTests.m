@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Damien DeVille. All rights reserved.
 //
 
-@import XCTest;
+#import <XCTest/XCTest>
 
 @interface LLHotKeyTests : XCTestCase
 
