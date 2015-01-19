@@ -40,10 +40,10 @@ static void _CommonInit(LLHotKeyControl *self)
 	
 	NSButtonCell *cell = [[NSButtonCell alloc] init];
 	[cell setButtonType:NSPushOnPushOffButton];
-	[cell setFont:[[NSFontManager sharedFontManager] convertFont:[cell font] toSize:11.0]];
-	[cell setBezelStyle:NSRoundRectBezelStyle];
-	[cell setFocusRingType:NSFocusRingTypeNone];
-	[self setCell:cell];
+	cell.font = [[NSFontManager sharedFontManager] convertFont:cell.font toSize:11.0];
+	cell.bezelStyle = NSRoundRectBezelStyle;
+	cell.focusRingType = NSFocusRingTypeNone;
+	self.cell = cell;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -78,7 +78,7 @@ static void _CommonInit(LLHotKeyControl *self)
 {
 	[super viewWillMoveToWindow:window];
 	
-	[self setRecording:NO];
+	self.recording = NO;
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
@@ -98,7 +98,7 @@ static void _CommonInit(LLHotKeyControl *self)
 
 - (BOOL)resignFirstResponder
 {
-	[self setRecording:NO];
+	self.recording = NO;
 	
 	return YES;
 }
@@ -111,14 +111,14 @@ static void _CommonInit(LLHotKeyControl *self)
 	
 	[self setNeedsDisplay];
 	
-	[self sendAction:[self action] to:[self target]];
+	[self sendAction:self.action to:self.target];
 }
 
 - (void)setEnabled:(BOOL)enabled
 {
 	[super setEnabled:enabled];
 	
-	[self setRecording:NO];
+	self.recording = NO;
 	
 	[self updateTrackingAreas];
 	[self setNeedsDisplay];
@@ -135,7 +135,7 @@ static void _CommonInit(LLHotKeyControl *self)
 {
 	_recording = recording;
 	
-	if (recording && ![self isEnabled]) {
+	if (recording && !self.enabled) {
 		return;
 	}
 	
@@ -148,7 +148,8 @@ static void _CommonInit(LLHotKeyControl *self)
 		[self teardownResignObserver];
 	}
 	
-	[self setShortcutPlaceholder:nil];
+	self.shortcutPlaceholder = nil;
+	
 	[self setNeedsDisplay];
 }
 
@@ -166,14 +167,14 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 - (CGRect)shortcutFrame
 {
 	CGRect shortcutFrame, accessoryFrame;
-	CGRectDivide([self bounds], &accessoryFrame, &shortcutFrame, LLHotKeyControlAccessoryButtonWidth, CGRectMaxXEdge);
+	CGRectDivide(self.bounds, &accessoryFrame, &shortcutFrame, LLHotKeyControlAccessoryButtonWidth, CGRectMaxXEdge);
 	return shortcutFrame;
 }
 
 - (CGRect)accessoryFrame
 {
 	CGRect shortcutFrame, accessoryFrame;
-	CGRectDivide([self bounds], &accessoryFrame, &shortcutFrame, LLHotKeyControlAccessoryButtonWidth, CGRectMaxXEdge);
+	CGRectDivide(self.bounds, &accessoryFrame, &shortcutFrame, LLHotKeyControlAccessoryButtonWidth, CGRectMaxXEdge);
 	return accessoryFrame;
 }
 
@@ -181,11 +182,13 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 
 - (void)drawInRect:(CGRect)frame withTitle:(NSString *)title alignment:(NSTextAlignment)alignment state:(NSInteger)state
 {
-	[[self cell] setTitle:title];
-	[[self cell] setAlignment:alignment];
-	[[self cell] setState:state];
-	[[self cell] setEnabled:[self isEnabled]];
-	[[self cell] drawWithFrame:frame inView:self];
+	NSButtonCell *cell = self.cell;
+	cell.title = title;
+	cell.alignment = alignment;
+	cell.state = state;
+	cell.enabled = self.enabled;
+	
+	[cell drawWithFrame:frame inView:self];
 }
 
 - (void)drawRect:(CGRect)dirtyRect
@@ -195,36 +198,36 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	
 	NSString *shortcutTitle = [self _currentShortcutTitle];
 	
-	if (![self isRecording] && [self hotKeyValue] == nil) {
-		[self drawInRect:[self bounds] withTitle:shortcutTitle alignment:NSCenterTextAlignment state:NSOffState];
+	if (!self.recording && self.hotKeyValue == nil) {
+		[self drawInRect:self.bounds withTitle:shortcutTitle alignment:NSCenterTextAlignment state:NSOffState];
 		return;
 	}
 	
-	[self drawInRect:[self bounds] withTitle:([self isRecording] ? escape : delete) alignment:NSRightTextAlignment state:NSOffState];
-	[self drawInRect:[self shortcutFrame] withTitle:shortcutTitle alignment:NSCenterTextAlignment state:([self isRecording] ? NSOnState : NSOffState)];
+	[self drawInRect:self.bounds withTitle:(self.recording ? escape : delete) alignment:NSRightTextAlignment state:NSOffState];
+	[self drawInRect:self.shortcutFrame withTitle:shortcutTitle alignment:NSCenterTextAlignment state:(self.recording ? NSOnState : NSOffState)];
 }
 
 - (NSString *)_currentShortcutTitle
 {
-	if ([self hotKeyValue] != nil) {
-		if ([self isRecording]) {
-			if ([self isHoveringAccessory]) {
+	if (self.hotKeyValue != nil) {
+		if (self.recording) {
+			if (self.hoveringAccessory) {
 				return NSLocalizedString(@"Use Previous Shortcut", @"LLHotKeyControl user previous shortcut");
 			}
-			if ([[self shortcutPlaceholder] length] > 0) {
-				return [self shortcutPlaceholder];
+			if (self.shortcutPlaceholder.length > 0) {
+				return self.shortcutPlaceholder;
 			}
 			return NSLocalizedString(@"Type New Shortcut", @"LLHotKeyControl type new shortcut");
 		}
-		return LLHotKeyStringForHotKey([self hotKeyValue]);
+		return LLHotKeyStringForHotKey(self.hotKeyValue);
 	}
 	
-	if ([self isRecording]) {
-		if ([self isHoveringAccessory]) {
+	if (self.recording) {
+		if (self.hoveringAccessory) {
 			return NSLocalizedString(@"Cancel", @"LLHotKeyControl cancel");
 		}
-		if ([[self shortcutPlaceholder] length] > 0) {
-			return [self shortcutPlaceholder];
+		if (self.shortcutPlaceholder.length > 0) {
+			return self.shortcutPlaceholder;
 		}
 		return NSLocalizedString(@"Type New Shortcut", @"LLHotKeyControl type new shortcut");
 	}
@@ -236,36 +239,36 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 
 - (void)mouseDown:(NSEvent *)event
 {
-	if (![self isEnabled]) {
+	if (!self.enabled) {
 		return;
 	}
 	
-	BOOL mousedAccessory = CGRectContainsPoint([self accessoryFrame], [self convertPoint:[event locationInWindow] fromView:nil]);
+	BOOL mousedAccessory = CGRectContainsPoint(self.accessoryFrame, [self convertPoint:event.locationInWindow fromView:nil]);
 	
-	if ([self isRecording] && mousedAccessory) {
-		[self setRecording:NO];
+	if (self.recording && mousedAccessory) {
+		self.recording = NO;
 		return;
 	}
 	
-	if (![self isRecording] && [self hotKeyValue] != nil && mousedAccessory) {
-		[self setHotKeyValue:nil];
+	if (!self.recording && self.hotKeyValue != nil && mousedAccessory) {
+		self.hotKeyValue = nil;
 		return;
 	}
 	
-	if (![self isRecording]) {
-		[self setRecording:YES];
+	if (!self.recording) {
+		self.recording = YES;
 		return;
 	}
 }
 
 - (void)mouseEntered:(NSEvent *)event
 {
-	[self setHoveringAccessory:YES];
+	self.hoveringAccessory = YES;
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-	[self setHoveringAccessory:NO];
+	self.hoveringAccessory = NO;
 }
 
 #pragma mark - Tracking areas
@@ -274,17 +277,17 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 {
 	[super updateTrackingAreas];
 	
-	if ([self accessoryArea] != nil) {
-		[self removeTrackingArea:[self accessoryArea]];
-		[self setAccessoryArea:nil];
+	if (self.accessoryArea != nil) {
+		[self removeTrackingArea:self.accessoryArea];
+		self.accessoryArea = nil;
 	}
 	
-	if (![self isEnabled]) {
+	if (!self.enabled) {
 		return;
 	}
 	
-	NSTrackingArea *accessoryArea = [[NSTrackingArea alloc] initWithRect:[self accessoryFrame] options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways | NSTrackingAssumeInside) owner:self userInfo:nil];
-	[self setAccessoryArea:accessoryArea];
+	NSTrackingArea *accessoryArea = [[NSTrackingArea alloc] initWithRect:self.accessoryFrame options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways | NSTrackingAssumeInside) owner:self userInfo:nil];
+	self.accessoryArea = accessoryArea;
 	[self addTrackingArea:accessoryArea];
 }
 
@@ -292,7 +295,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 
 - (void)setupEventMonitoring
 {
-	if ([self eventMonitor] != nil) {
+	if (self.eventMonitor != nil) {
 		return;
 	}
 	
@@ -301,41 +304,41 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 		__strong typeof (welf) strelf = welf;
 		return [strelf _handleLocalEvent:event];
 	}];
-	[self setEventMonitor:eventMonitor];
+	self.eventMonitor = eventMonitor;
 }
 
 - (void)teardownEventMonitoring
 {
-	if ([self eventMonitor] == nil) {
+	if (self.eventMonitor == nil) {
 		return;
 	}
 	
-	[NSEvent removeMonitor:[self eventMonitor]];
-	[self setEventMonitor:nil];
+	[NSEvent removeMonitor:self.eventMonitor];
+	self.eventMonitor = nil;
 }
 
 - (void)setupResignObserver
 {
-	if ([self resignObserver] != nil) {
+	if (self.resignObserver != nil) {
 		return;
 	}
 	
 	__weak typeof (self) welf = self;
-	id resignObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResignKeyNotification object:[self window] queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *notification) {
+	id resignObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *notification) {
 		__strong typeof (welf) strelf = welf;
-		[strelf setRecording:NO];
+		strelf.recording = NO;
 	}];
-	[self setResignObserver:resignObserver];
+	self.resignObserver = resignObserver;
 }
 
 - (void)teardownResignObserver
 {
-	if ([self resignObserver] == nil) {
+	if (self.resignObserver == nil) {
 		return;
 	}
 	
-	[[NSNotificationCenter defaultCenter] removeObserver:[self resignObserver]];
-	[self setResignObserver:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self.resignObserver];
+	self.resignObserver = nil;
 }
 
 #pragma mark - Private
@@ -344,27 +347,27 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 {
 	LLHotKey *hotKey = [LLHotKey hotKeyWithEvent:event];
 	
-	unsigned short keyCode = [hotKey keyCode];
-	NSUInteger modifierFlags = ([hotKey modifierFlags] & (NSControlKeyMask | NSAlternateKeyMask | NSShiftKeyMask | NSCommandKeyMask));
+	unsigned short keyCode = hotKey.keyCode;
+	NSUInteger modifierFlags = (hotKey.modifierFlags & (NSControlKeyMask | NSAlternateKeyMask | NSShiftKeyMask | NSCommandKeyMask));
 	
 	if (keyCode == kVK_Delete || keyCode == kVK_ForwardDelete) {
-		[self setHotKeyValue:nil];
-		[self setRecording:NO];
+		self.hotKeyValue = nil;
+		self.recording = NO;
 		return nil;
 	}
 	
 	if (keyCode == kVK_Escape) {
-		[self setRecording:NO];
+		self.recording = NO;
 		return nil;
 	}
 	
 	if (modifierFlags == NSCommandKeyMask && (keyCode == kVK_ANSI_W || keyCode == kVK_ANSI_Q)) {
-		[self setRecording:NO];
+		self.recording = NO;
 		return event;
 	}
 	
-	if ([LLHotKeyStringForKeyCode(keyCode) length] == 0) {
-		[self setShortcutPlaceholder:LLHotKeyStringForModifiers(modifierFlags)];
+	if (LLHotKeyStringForKeyCode(keyCode).length == 0) {
+		self.shortcutPlaceholder = LLHotKeyStringForModifiers(modifierFlags);
 		return nil;
 	}
 	
@@ -374,12 +377,12 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	
 	if (!LLHotKeyIsHotKeyAvailable(hotKey, event)) {
 		NSBeep();
-		[self setShortcutPlaceholder:nil];
+		self.shortcutPlaceholder = nil;
 		return nil;
 	}
 	
-	[self setHotKeyValue:hotKey];
-	[self setRecording:NO];
+	self.hotKeyValue = hotKey;
+	self.recording = NO;
 	
 	return nil;
 }

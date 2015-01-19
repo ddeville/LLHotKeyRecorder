@@ -24,21 +24,21 @@
 + (instancetype)hotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)modifierFlags
 {
 	LLHotKey *hotKey = [[self alloc] init];
-	[hotKey setKeyCode:keyCode];
-	[hotKey setModifierFlags:modifierFlags];
+	hotKey.keyCode = keyCode;
+	hotKey.modifierFlags = modifierFlags;
 	return hotKey;
 }
 
 + (instancetype)hotKeyWithEvent:(NSEvent *)event
 {
-	return [self hotKeyWithKeyCode:[event keyCode] modifierFlags:[event modifierFlags]];
+	return [self hotKeyWithKeyCode:event.keyCode modifierFlags:event.modifierFlags];
 }
 
 #pragma mark - NSObject
 
 - (NSString *)description
 {
-	NSMutableString *description = [NSMutableString stringWithString:[super description]];
+	NSMutableString *description = [NSMutableString stringWithString:super.description];
 	[description appendString:@" – "];
 	[description appendFormat:@"%@", LLHotKeyStringForHotKey(self)];
 	return description;
@@ -88,8 +88,8 @@ static NSString * const LLHotKeyModifierFlags = @"modifierFlags";
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeObject:@([self keyCode]) forKey:LLHotKeyKeyCode];
-	[coder encodeObject:@([self modifierFlags]) forKey:LLHotKeyModifierFlags];
+	[coder encodeObject:@(self.keyCode) forKey:LLHotKeyKeyCode];
+	[coder encodeObject:@(self.modifierFlags) forKey:LLHotKeyModifierFlags];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder

@@ -58,28 +58,28 @@
 {
 	NSParameterAssert(hotKey != nil);
 	
-	NSMutableSet *observers = [NSMutableSet setWithSet:[[self cocoaHotKeyToObserversMap] objectForKey:hotKey]];
+	NSMutableSet *observers = [NSMutableSet setWithSet:[self.cocoaHotKeyToObserversMap objectForKey:hotKey]];
 	
-	if ([observers count] == 0) {
+	if (observers.count == 0) {
 		[self _registerHotKey:hotKey];
 	}
 	
 	[observers addObject:[_LLHotKeyObserver observerWithObject:observer selector:selector]];
-	[[self cocoaHotKeyToObserversMap] setObject:observers forKey:hotKey];
+	[self.cocoaHotKeyToObserversMap setObject:observers forKey:hotKey];
 }
 
 - (void)removeObserver:(id)observer hotKey:(LLHotKey *)hotKey
 {
 	NSParameterAssert(hotKey != nil);
 	
-	NSMutableSet *observers = [NSMutableSet setWithSet:[[self cocoaHotKeyToObserversMap] objectForKey:hotKey]];
+	NSMutableSet *observers = [NSMutableSet setWithSet:[self.cocoaHotKeyToObserversMap objectForKey:hotKey]];
 	[observers removeObject:[_LLHotKeyObserver observerWithObject:observer selector:NULL]];
 	
-	if ([observers count] == 0) {
+	if (observers.count == 0) {
 		[self _unregisterHotKey:hotKey];
 	}
 	
-	[[self cocoaHotKeyToObserversMap] setObject:observers forKey:hotKey];
+	[self.cocoaHotKeyToObserversMap setObject:observers forKey:hotKey];
 }
 
 #pragma mark - Private (Key registration)
@@ -89,14 +89,14 @@
 	static UInt32 carbonHotKeyID = 0;
 	
 	EventHotKeyID eventHotKeyID = {.signature = 'htk1', .id = carbonHotKeyID};
-	UInt32 carbonKeyCode = [hotKey keyCode];
-	UInt32 carbonModifiers = _LLCocoaToCarbonFlagModifiers([hotKey modifierFlags]);
+	UInt32 carbonKeyCode = hotKey.keyCode;
+	UInt32 carbonModifiers = _LLCocoaToCarbonFlagModifiers(hotKey.modifierFlags);
 	
 	EventHotKeyRef carbonHotKey;
 	RegisterEventHotKey(carbonKeyCode, carbonModifiers, eventHotKeyID, GetEventDispatcherTarget(), 0, &carbonHotKey);
 	
-	[[self carbonHotKeyIDToCarbonHotKeyMap] setObject:[NSValue valueWithPointer:carbonHotKey] forKey:@(carbonHotKeyID)];
-	[[self carbonHotKeyIDToCocoaHotKeyMap] setObject:hotKey forKey:@(carbonHotKeyID)];
+	[self.carbonHotKeyIDToCarbonHotKeyMap setObject:[NSValue valueWithPointer:carbonHotKey] forKey:@(carbonHotKeyID)];
+	[self.carbonHotKeyIDToCocoaHotKeyMap setObject:hotKey forKey:@(carbonHotKeyID)];
 	
 	carbonHotKeyID++;
 }
@@ -105,9 +105,9 @@
 {
 	__block UInt32 carbonHotKeyID = -1;
 	
-	[[self carbonHotKeyIDToCocoaHotKeyMap] enumerateKeysAndObjectsUsingBlock:^ (NSNumber *hotKeyNumber, LLHotKey *cocoaHotKey, BOOL *stop) {
+	[self.carbonHotKeyIDToCocoaHotKeyMap enumerateKeysAndObjectsUsingBlock:^ (NSNumber *hotKeyNumber, LLHotKey *cocoaHotKey, BOOL *stop) {
 		if ([cocoaHotKey isEqual:hotKey]) {
-			carbonHotKeyID = (UInt32)[hotKeyNumber unsignedIntegerValue];
+			carbonHotKeyID = (UInt32)hotKeyNumber.unsignedIntegerValue;
 		}
 	}];
 	
@@ -115,9 +115,9 @@
 		return;
 	}
 	
-	[[self carbonHotKeyIDToCocoaHotKeyMap] removeObjectForKey:@(carbonHotKeyID)];
+	[self.carbonHotKeyIDToCocoaHotKeyMap removeObjectForKey:@(carbonHotKeyID)];
 	
-	EventHotKeyRef carbonHotKey = [[[self carbonHotKeyIDToCarbonHotKeyMap] objectForKey:@(carbonHotKeyID)] pointerValue];
+	EventHotKeyRef carbonHotKey = [[self.carbonHotKeyIDToCarbonHotKeyMap objectForKey:@(carbonHotKeyID)] pointerValue];
 	
 	if (carbonHotKey == NULL) {
 		return;
@@ -125,17 +125,17 @@
 	
 	UnregisterEventHotKey(carbonHotKey);
 	
-	[[self carbonHotKeyIDToCarbonHotKeyMap] removeObjectForKey:@(carbonHotKeyID)];
+	[self.carbonHotKeyIDToCarbonHotKeyMap removeObjectForKey:@(carbonHotKeyID)];
 }
 
 #pragma mark - Private
 
 - (void)_invokeObserversForHotKey:(LLHotKey *)hotKey
 {
-	NSSet *observers = [[self cocoaHotKeyToObserversMap] objectForKey:hotKey];
+	NSSet *observers = [self.cocoaHotKeyToObserversMap objectForKey:hotKey];
 	
 	for (_LLHotKeyObserver *observer in  observers) {
-		((void (*)(id, SEL, id))objc_msgSend)([observer object], [observer selector], hotKey);
+		((void (*)(id, SEL, id))objc_msgSend)(observer.object, observer.selector, hotKey);
 	}
 }
 
@@ -174,7 +174,7 @@ static OSStatus _LLHotKeyCenterHotKeyEventHandler(EventHandlerCallRef nextHandle
 	EventHotKeyID hotKeyID;
 	GetEventParameter(carbonEvent, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(hotKeyID), NULL, &hotKeyID);
 	
-	LLHotKey *hotKey = [[self carbonHotKeyIDToCocoaHotKeyMap] objectForKey:@(hotKeyID.id)];
+	LLHotKey *hotKey = [self.carbonHotKeyIDToCocoaHotKeyMap objectForKey:@(hotKeyID.id)];
 	[self _invokeObserversForHotKey:hotKey];
 	
     return noErr;

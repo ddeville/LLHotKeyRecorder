@@ -13,17 +13,17 @@
 + (instancetype)observerWithObject:(id)object selector:(SEL)selector
 {
 	_LLHotKeyObserver *observer = [[_LLHotKeyObserver alloc] init];
-	[observer setObject:object];
-	[observer setSelector:selector];
+	observer.object = object;
+	observer.selector = selector;
 	return observer;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(_LLHotKeyObserver *)object
 {
 	if (![object isKindOfClass:[self class]]) {
 		return NO;
 	}
-	if (![[object object] isEqual:[self object]]) {
+	if (![object.object isEqual:self.object]) {
 		return NO;
 	}
 	return YES;
@@ -31,7 +31,7 @@
 
 - (NSUInteger)hash
 {
-	return [[self object] hash];
+	return [self.object hash];
 }
 
 @end
