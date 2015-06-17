@@ -113,7 +113,7 @@ static NSString * const LLHotKeyModifierFlags = @"modifierFlags";
 {
 	static LLHotKey *nullHotKey = nil;
 	static dispatch_once_t onceToken = 0;
-	dispatch_once(&onceToken, ^ {
+	dispatch_once(&onceToken, ^{
 		nullHotKey = [LLHotKey hotKeyWithKeyCode:-1 modifierFlags:0];
 	});
 	return nullHotKey;

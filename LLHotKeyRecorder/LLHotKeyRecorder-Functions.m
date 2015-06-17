@@ -121,7 +121,7 @@ static BOOL _LLHotKeyCanUseKeyEquivalent(NSEvent *event, NSMenu *menu)
 {
 	static NSButton *button = nil;
 	static dispatch_once_t onceToken = 0;
-	dispatch_once(&onceToken, ^ {
+	dispatch_once(&onceToken, ^{
 		button = [[NSButton alloc] initWithFrame:CGRectZero];
 	});
 	

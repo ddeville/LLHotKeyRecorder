@@ -29,7 +29,7 @@
 {
 	static LLHotKeyCenter *sharedCenter = nil;
 	static dispatch_once_t onceToken = 0;
-	dispatch_once(&onceToken, ^ {
+	dispatch_once(&onceToken, ^{
 		sharedCenter = [[self alloc] init];
 	});
 	return sharedCenter;
@@ -65,7 +65,7 @@
 	}
 	
 	[observers addObject:[_LLHotKeyObserver observerWithObject:observer selector:selector]];
-	[self.cocoaHotKeyToObserversMap setObject:observers forKey:hotKey];
+    self.cocoaHotKeyToObserversMap[hotKey] = observers;
 }
 
 - (void)removeObserver:(id)observer hotKey:(LLHotKey *)hotKey
@@ -78,8 +78,8 @@
 	if (observers.count == 0) {
 		[self _unregisterHotKey:hotKey];
 	}
-	
-	[self.cocoaHotKeyToObserversMap setObject:observers forKey:hotKey];
+
+    self.cocoaHotKeyToObserversMap[hotKey] = observers;
 }
 
 #pragma mark - Private (Key registration)
@@ -94,9 +94,9 @@
 	
 	EventHotKeyRef carbonHotKey;
 	RegisterEventHotKey(carbonKeyCode, carbonModifiers, eventHotKeyID, GetEventDispatcherTarget(), 0, &carbonHotKey);
-	
-	[self.carbonHotKeyIDToCarbonHotKeyMap setObject:[NSValue valueWithPointer:carbonHotKey] forKey:@(carbonHotKeyID)];
-	[self.carbonHotKeyIDToCocoaHotKeyMap setObject:hotKey forKey:@(carbonHotKeyID)];
+
+    self.carbonHotKeyIDToCarbonHotKeyMap[@(carbonHotKeyID)] = [NSValue valueWithPointer:carbonHotKey];
+    self.carbonHotKeyIDToCocoaHotKeyMap[@(carbonHotKeyID)] = hotKey;
 	
 	carbonHotKeyID++;
 }
