@@ -16,7 +16,7 @@ NSString *LLHotKeyStringForModifiers(NSUInteger modifiers)
 {
 	NSMutableString *modifiersString = [NSMutableString string];
 	
-	void (^addKey)(unichar) = ^ void (unichar key) {
+	void (^addKey)(unichar) = ^(unichar key) {
 		[modifiersString appendString:[NSString stringWithFormat:@"%C", key]];
 	};
 	
