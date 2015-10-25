@@ -36,7 +36,7 @@
 	}
 	
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:archivedRepresentation];
-	[unarchiver setRequiresSecureCoding:YES];
+    unarchiver.requiresSecureCoding = YES;
 	
 	NSSet *allowedClasses = [NSSet setWithObject:[LLHotKey class]];
 	

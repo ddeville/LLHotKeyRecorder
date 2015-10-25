@@ -36,7 +36,7 @@
 
 static void _CommonInit(LLHotKeyControl *self)
 {
-	[self setFocusRingType:NSFocusRingTypeNone];
+    self.focusRingType = NSFocusRingTypeNone;
 	
 	NSButtonCell *cell = [[NSButtonCell alloc] init];
 	[cell setButtonType:NSPushOnPushOffButton];
@@ -116,7 +116,7 @@ static void _CommonInit(LLHotKeyControl *self)
 
 - (void)setEnabled:(BOOL)enabled
 {
-	[super setEnabled:enabled];
+    super.enabled = enabled;
 	
 	self.recording = NO;
 	

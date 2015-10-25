@@ -109,12 +109,12 @@ NSString *LLHotKeyStringForKeyCode(unsigned short keyCode)
 		}
 	}
 	
-	return [keystroke uppercaseString] ? : @"";
+	return keystroke.uppercaseString ? : @"";
 }
 
 NSString *LLHotKeyStringForHotKey(LLHotKey *hotKey)
 {
-	return [NSString stringWithFormat:@"%@%@", LLHotKeyStringForModifiers([hotKey modifierFlags]), LLHotKeyStringForKeyCode([hotKey keyCode])];
+	return [NSString stringWithFormat:@"%@%@", LLHotKeyStringForModifiers(hotKey.modifierFlags), LLHotKeyStringForKeyCode(hotKey.keyCode)];
 }
 
 static BOOL _LLHotKeyCanUseKeyEquivalent(NSEvent *event, NSMenu *menu)
@@ -125,15 +125,15 @@ static BOOL _LLHotKeyCanUseKeyEquivalent(NSEvent *event, NSMenu *menu)
 		button = [[NSButton alloc] initWithFrame:CGRectZero];
 	});
 	
-	for (NSMenuItem *currentMenuItem in [menu itemArray]) {
-		if ([currentMenuItem hasSubmenu]) {
-			if (!_LLHotKeyCanUseKeyEquivalent(event, [currentMenuItem submenu])) {
+	for (NSMenuItem *currentMenuItem in menu.itemArray) {
+		if (currentMenuItem.hasSubmenu) {
+			if (!_LLHotKeyCanUseKeyEquivalent(event, currentMenuItem.submenu)) {
 				return NO;
 			}
 		}
 		
-		[button setKeyEquivalent:[currentMenuItem keyEquivalent]];
-		[button setKeyEquivalentModifierMask:[currentMenuItem keyEquivalentModifierMask]];
+        button.keyEquivalent = currentMenuItem.keyEquivalent;
+        button.keyEquivalentModifierMask = currentMenuItem.keyEquivalentModifierMask;
 		
 		if ([button performKeyEquivalent:event]) {
 			return NO;
@@ -157,14 +157,14 @@ BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey, NSEvent *event)
 		unsigned short keyCode = (unsigned short)[hotKeyInfo[(id)kHISymbolicHotKeyCode] unsignedIntegerValue];
 		NSUInteger modifierFlags = [hotKeyInfo[(id)kHISymbolicHotKeyModifiers] unsignedIntegerValue];
 		
-		if ([hotKey keyCode] == keyCode && [hotKey modifierFlags] == modifierFlags) {
+		if (hotKey.keyCode == keyCode && hotKey.modifierFlags == modifierFlags) {
 			return NO;
 		}
 	}
 	
 	CFRelease(hotKeys);
 	
-	if (!_LLHotKeyCanUseKeyEquivalent(event, [[NSApplication sharedApplication] mainMenu])) {
+	if (!_LLHotKeyCanUseKeyEquivalent(event, [NSApplication sharedApplication].mainMenu)) {
 		return NO;
 	}
 	
@@ -173,8 +173,8 @@ BOOL LLHotKeyIsHotKeyAvailable(LLHotKey *hotKey, NSEvent *event)
 
 BOOL LLHotKeyIsHotKeyValid(LLHotKey *hotKey, NSEvent *event)
 {
-	unsigned short keyCode = [hotKey keyCode];
-	NSUInteger modifierFlags = [hotKey modifierFlags];
+	unsigned short keyCode = hotKey.keyCode;
+	NSUInteger modifierFlags = hotKey.modifierFlags;
 	
 	BOOL includesFunctionKey = ((keyCode == kVK_F1) || (keyCode == kVK_F2) || (keyCode == kVK_F3) || (keyCode == kVK_F4) || (keyCode == kVK_F5) || (keyCode == kVK_F6) || (keyCode == kVK_F7) || (keyCode == kVK_F8) || (keyCode == kVK_F9) || (keyCode == kVK_F10) || (keyCode == kVK_F11) || (keyCode == kVK_F12) || (keyCode == kVK_F13) || (keyCode == kVK_F14) || (keyCode == kVK_F15) || (keyCode == kVK_F16) || (keyCode == kVK_F17) || (keyCode == kVK_F18) || (keyCode == kVK_F19) || (keyCode == kVK_F20));
 	if (includesFunctionKey) {
