@@ -46,7 +46,7 @@ static void _CommonInit(LLHotKeyControl *self)
 	self.cell = cell;
 }
 
-- (id)initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
 	self = [super initWithFrame:frame];
 	if (self == nil) {
@@ -56,7 +56,7 @@ static void _CommonInit(LLHotKeyControl *self)
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	self = [super initWithCoder:decoder];
 	if (self == nil) {

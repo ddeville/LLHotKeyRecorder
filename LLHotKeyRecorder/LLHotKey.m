@@ -92,7 +92,7 @@ static NSString * const LLHotKeyModifierFlags = @"modifierFlags";
 	[coder encodeObject:@(self.modifierFlags) forKey:LLHotKeyModifierFlags];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	self = [self init];
 	if (self == nil) {
