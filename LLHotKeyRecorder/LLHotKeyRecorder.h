@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LLHotKeyRecorder/LLHotKeyRecorder-Constants.h"
-#import "LLHotKeyRecorder/LLHotKeyRecorder-Functions.h"
+#import <LLHotKeyRecorder/LLHotKeyRecorder-Constants.h>
+#import <LLHotKeyRecorder/LLHotKeyRecorder-Functions.h>
 
-#import "LLHotKeyRecorder/LLHotKey.h"
-#import "LLHotKeyRecorder/LLHotKeyCenter.h"
+#import <LLHotKeyRecorder/LLHotKey.h>
+#import <LLHotKeyRecorder/LLHotKeyCenter.h>
 
-#import "LLHotKeyRecorder/LLHotKeyControl.h"
+#import <LLHotKeyRecorder/LLHotKeyControl.h>
 
-#import "LLHotKeyRecorder/NSUserDefaults+LLHotKey.h"
+#import <LLHotKeyRecorder/NSUserDefaults+LLHotKey.h>
