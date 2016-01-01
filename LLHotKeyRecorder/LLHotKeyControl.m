@@ -300,7 +300,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	}
 	
 	__weak typeof (self) welf = self;
-	id eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyDownMask | NSFlagsChangedMask) handler:^ NSEvent * (NSEvent *event) {
+	id eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyDownMask | NSFlagsChangedMask) handler:^NSEvent *(NSEvent *event) {
 		__strong typeof (welf) strelf = welf;
 		return [strelf _handleLocalEvent:event];
 	}];
@@ -324,7 +324,7 @@ static const CGFloat LLHotKeyControlAccessoryButtonWidth = 23.0;
 	}
 	
 	__weak typeof (self) welf = self;
-	id resignObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^ (NSNotification *notification) {
+	id resignObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 		__strong typeof (welf) strelf = welf;
 		strelf.recording = NO;
 	}];

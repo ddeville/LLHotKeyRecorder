@@ -105,7 +105,7 @@
 {
 	__block UInt32 carbonHotKeyID = -1;
 	
-	[self.carbonHotKeyIDToCocoaHotKeyMap enumerateKeysAndObjectsUsingBlock:^ (NSNumber *hotKeyNumber, LLHotKey *cocoaHotKey, BOOL *stop) {
+	[self.carbonHotKeyIDToCocoaHotKeyMap enumerateKeysAndObjectsUsingBlock:^(NSNumber *hotKeyNumber, LLHotKey *cocoaHotKey, BOOL *stop) {
 		if ([cocoaHotKey isEqual:hotKey]) {
 			carbonHotKeyID = (UInt32)hotKeyNumber.unsignedIntegerValue;
 		}
