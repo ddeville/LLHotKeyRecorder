@@ -109,7 +109,7 @@ static void _CommonInit(LLHotKeyControl *self)
 {
 	_hotKeyValue = hotKeyValue;
 	
-	[self setNeedsDisplay];
+    self.needsDisplay = YES;
 	
 	[self sendAction:self.action to:self.target];
 }
@@ -121,14 +121,15 @@ static void _CommonInit(LLHotKeyControl *self)
 	self.recording = NO;
 	
 	[self updateTrackingAreas];
-	[self setNeedsDisplay];
+    
+    self.needsDisplay = YES;
 }
 
 - (void)setHoveringAccessory:(BOOL)hoveringAccessory
 {
 	_hoveringAccessory = hoveringAccessory;
 	
-	[self setNeedsDisplay];
+    self.needsDisplay = YES;
 }
 
 - (void)setRecording:(BOOL)recording
@@ -149,15 +150,14 @@ static void _CommonInit(LLHotKeyControl *self)
 	}
 	
 	self.shortcutPlaceholder = nil;
-	
-	[self setNeedsDisplay];
+    self.needsDisplay = YES;
 }
 
 - (void)setShortcutPlaceholder:(NSString *)shortcutPlaceholder
 {
 	_shortcutPlaceholder = [shortcutPlaceholder copy];
 	
-	[self setNeedsDisplay];
+    self.needsDisplay = YES;
 }
 
 #pragma mark - Geometry
